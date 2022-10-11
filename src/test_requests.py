@@ -98,7 +98,6 @@ params_energy = {
         'EndTime': TODAY,
         }
 response_energy = requests.get(endpoint_energy, params=params_energy)
-print(response_energy.status_code)
 
 new_building = pd.DataFrame.from_dict(response_energy.json())
 new_building['timestamp'] = pd.to_datetime(new_building['timestamp'])
@@ -114,6 +113,7 @@ params = {
         }
 endpoint2 = 'http://127.0.0.1:8000/prediction/'
 response = requests.post(endpoint2, json=params)
+print(response.status_code)
 if response:
     print(response.text)
 else:

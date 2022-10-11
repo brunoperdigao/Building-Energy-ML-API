@@ -32,6 +32,7 @@ def get_prediction(item: Parameters):
     df_fut_cov = pd.read_json(item.json_fut_cov)
     future_series = TimeSeries.from_dataframe(
                                     df_fut_cov,
+                                    time_col='timestamp',
                                     fill_missing_dates=True,
                                               )
     scaler_fut_cov = Scaler(scaler=MinMaxScaler(feature_range=(0.005, 1)))
@@ -45,6 +46,7 @@ def get_prediction(item: Parameters):
                                        fill_missing_dates=True)
     scaler = Scaler(scaler=MinMaxScaler(feature_range=(0.005, 1)))
     series_scaled = scaler.fit_transform(series)
+    print(series_scaled)
     pred = model.predict(9,
                          series=series_scaled,
                          future_covariates=future_series_scaled)
