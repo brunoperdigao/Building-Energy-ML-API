@@ -11,5 +11,5 @@ COPY ./src /usr/src
 COPY ./models /usr/models
 
 
-CMD [ "uvicorn", "--app-dir", "src/", "main:app" ]
+CMD [ "uvicorn", "--app-dir", "src/", "main:app", "--host", "0.0.0.0", "--port", "10000" ]
 
