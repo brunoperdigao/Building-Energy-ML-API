@@ -10,15 +10,13 @@ from darts.models import LightGBMModel
 from darts.dataprocessing.transformers import Scaler
 from sklearn.preprocessing import MinMaxScaler
 
-future_covariates_path = "./models/future_covariates.pkl"
-future_series = TimeSeries.from_pickle(future_covariates_path)
 data = bz2.BZ2File('./models/ts_model.pbz2', 'rb')
 model = pickle.load(data)
-print(model)
 
 class Parameters(BaseModel):
     n_days_to_predict: int
-    df_in: str
+    json_fut_cov: str
+    json_building: str
     
 app = FastAPI()
 
@@ -26,13 +24,22 @@ app = FastAPI()
 def home():
     return {"message": "API running."}
 
-@app.get("/future_covariates/")
-def get_future_covariates():
-    return FileResponse(future_covariates_path)
 
 @app.post("/prediction/")
 def get_prediction(item: Parameters):
-    df = pd.read_json(item.df_in)
+    
+    #####
+    df_fut_cov = pd.read_json(item.json_fut_cov)
+    future_series = TimeSeries.from_dataframe(
+                                    df_fut_cov,
+                                    fill_missing_dates=True,
+                                              )
+    scaler_fut_cov = Scaler(scaler=MinMaxScaler(feature_range=(0.005, 1)))
+    future_series_scaled = scaler_fut_cov.fit_transform(future_series)
+    
+
+    #####
+    df = pd.read_json(item.json_building)
     series = TimeSeries.from_dataframe(df,
                                        time_col='timestamp',
                                        fill_missing_dates=True)
@@ -40,7 +47,7 @@ def get_prediction(item: Parameters):
     series_scaled = scaler.fit_transform(series)
     pred = model.predict(9,
                          series=series_scaled,
-                         future_covariates=future_series)
+                         future_covariates=future_series_scaled)
     #
     scaler_inverse = Scaler()
     scaler_inverse = scaler_inverse.fit(series)
@@ -51,8 +58,3 @@ def get_prediction(item: Parameters):
     return (pred_inverted.pd_dataframe().to_json())
     
 
-### Import model
-### Create a function to get future_covariates
-### Future covariates will be passed to dashboard and be updated there
-### Create a function to with parameters (future_covariates and n_days_to_predict)
-### Return a JSON or Dataframe?
