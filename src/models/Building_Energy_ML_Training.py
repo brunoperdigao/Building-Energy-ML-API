@@ -97,7 +97,9 @@ len(propertyCodes)
 
 # %% [markdown] id="3zUs30JJnNTQ"
 # Agora com os `propertyCode` coletados, vamos fazer uma busca pelos dados de cada edificação. No código abaixo montamos um Dataframe com os dados de todas as edificações. Para evitar erros e dados incompletos, primeiro testamos se a resposta da API é positiva (200), se os dados estão vazios ou se contém dados duplicados. Esses critérios foram utilizados pela observação desses problemas ao longo do processo. Dos 163 `propertyCodes` selecionados, apenas 70 foram bem sucedidos.
+#
 # ///
+#
 # Now with the `propertyCode` collected, let's do a search for the data of each building. In the code below we set up a Dataframe with data from all buildings. To avoid errors and incomplete data, we first test if the API response is positive (200), if the data is empty or if it contains duplicate data. These criteria were used by observing these problems throughout the process. Of the 163 `propertyCodes` selected, only 70 were successful.
 
 # %% colab={"base_uri": "https://localhost:8080/"} id="-DyBra6GkxyJ" outputId="e9b6d469-9ad2-4d54-b25e-be2ac4a61e54"
@@ -350,6 +352,11 @@ series_covariates_scaled.plot()
 # %% [markdown] id="LtL7ZZxx5zgD"
 # Como input para o modelo, passaremos uma lista de séries (cada uma representando uma edificação) e as covariáveis precisam ser passadas também em uma lista no mesmo formato da lista dos dados principais.
 # O modelo é criado com `lag=90` e `output_chunk_length=30`, ou seja, os dados são divididos em series de 90 entradas para 30 saídas, e vai sucessivamente avançando em ciclos até ler o conjunto completo.
+#
+# ///
+#
+# As input to the model, we will pass a list of series (each one representing a building) and the covariates must also be passed in a list in the same format as the main data list.
+# The model is created with `lag=90` and `output_chunk_length=30`, that is, the data is divided into series of 90 inputs for 30 outputs, and successively advances in cycles until reading the complete set.
 
 # %% id="sOYvPqkVepVY"
 model_test = LightGBMModel(
