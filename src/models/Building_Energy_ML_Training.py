@@ -16,6 +16,13 @@
 # # Treinamento de modelo de Machine Learning para análise de série temporal e previsão de consumo energético em edificações
 #
 # Este notebook demonstra como foi feito o treinamento de um modelo para utilização neste [Dashboard](https://building-energy-dashboard.onrender.com)  sobre consumo energético em edificações. Para este processo utilizaremos algumas bibliotecas básicas de ciência de dados, com destaque para a biblioteca Darts, especializada em Machine Learning para séries temporais. Iniciamos com as devidas instalações e importações.
+#
+# ///
+#
+# # Machine Learning model training for time series analysis and energy consumption prediction in buildings
+#
+# This notebook demonstrates how a model was trained for use in this [Dashboard](https://building-energy-dashboard.onrender.com) on energy consumption in buildings. For this process, we will use some basic data science libraries, especially the Darts library, specialized in Machine Learning for time series. We started with the proper installations and imports.
+#
 
 # %% colab={"base_uri": "https://localhost:8080/"} id="jH1R1LT7Rc8-" outputId="4b449395-e674-43a2-de9d-08017f394140"
 # Necessary for Google Colab
@@ -55,7 +62,9 @@ from sklearn.preprocessing import MinMaxScaler
 #
 # Os dados utilizados nesse processo são coletados de uma API fornecida pela prefeitura de Helsinki, na Finlândia. Para mais detalhes sobre esse processo, visite a explicação completa sobre o [Dashboard](https://github.com/brunoperdigao/Building-Energy-Dashboard#readme).
 # Inicialmente vamos coletar a lista de edificações que se enquadram no tipo de uso "escritório". E para cada edifício, pegamos seu `propertyCode` que vamos usar posteriormente para coletar seus dados de consumo energético. Nesse processo, descartamos alguns códigos que estão vazios ou fora do padrão.
-
+#
+# ///
+#
 # %% [markdown] id="OMZmqy4NvjBy"
 # ## Main data - Buildings
 # The data used in this process are collect from a API provided by Helsink mucinipality, Finland. To get more details about this, visit the [dashboard page](https://github.com/brunoperdigao/Building-Energy-Dashboard#readme)
