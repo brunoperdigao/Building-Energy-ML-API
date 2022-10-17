@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from fastapi.responses import FileResponse
 from pydantic import BaseModel, Json
 import pandas as pd
 import pickle
