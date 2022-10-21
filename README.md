@@ -1,7 +1,8 @@
 Building Energy ML-API
 ==============================
 
-A Machine Learning model for timeseries prediction on buildings energy consumption data
+A Machine Learning model for timeseries prediction on buildings energy consumption data.
+This model is used in [this project.](https://github.com/brunoperdigao/Building-Energy-Dashboard)
 
 Project Organization
 ------------
